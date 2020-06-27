@@ -50,32 +50,36 @@ const Signup = () => {
         alignItems: 'center',
       }}>
       <View style={styles.view}>
-        <Text style={styles.text}>Welcome to our sign up page</Text>
+        {/* <Text style={styles.text}>Welcome to our sign up page</Text> */}
         <View style={styles.container}>
           <TextInput
+            style={styles.TextInput}
             value={fullName}
             onChangeText={text => setFullName(text)}
             placeholder="add name"
           />
           <TextInput
+            style={styles.TextInput}
             value={email}
             onChangeText={text => setEmail(text)}
             placeholder="add email"
           />
           <TextInput
+            style={styles.TextInput}
             value={password}
             onChangeText={text => setPassword(text)}
             placeholder="add password"
           />
           <TextInput
+            style={styles.TextInput}
             value={gender}
             onChangeText={text => setGender(text)}
             placeholder="gender"
           />
         </View>
       </View>
-      <View style={styles.button}>
-        <Button title="sign up" onPress={postEvents} />
+      <View style={styles.buttonView}>
+        <Button title="sign up" onPress={postEvents} style={styles.button} />
       </View>
     </View>
   );
