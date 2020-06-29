@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
-import {styles, name} from './signup_styles';
+import {styles, name} from '../Styles.components/signup_styles';
 import axios from 'axios';
 import {useDimensions} from '@react-native-community/hooks';
 

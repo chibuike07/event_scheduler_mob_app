@@ -2,10 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {Text, View, TextInput, Button, Alert, StatusBar} from 'react-native';
 import axios from 'axios';
 import {Actions} from 'react-native-router-flux';
+import {styles} from '../Styles.components/SignIn_styles';
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
   const [httpResponse, setHttpResponse] = useState(null);
+  const {container} = styles;
 
   const handleSubmit = async () => {
     let userNames;
@@ -52,7 +54,7 @@ const SignIn = ({navigation}) => {
   };
 
   return (
-    <View>
+    <View style={container}>
       <TextInput
         value={email}
         placeholder="add email"
