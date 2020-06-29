@@ -7,35 +7,17 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-// import SignIn from './src/SignIn';
-import SignUp from './src/Register/SignUp.component/Signup';
+import {StyleSheet, View, Text, Button} from 'react-native';
+import HomePage from './src/pages/home_component/home';
 
 const App = () => {
-  // console.log('styles', styles);
   return (
-    <View style={styles.conta}>
-      <SignUp />
+    <View>
+      <HomePage />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  conta: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignContent: 'center',
-    color: 'yellow',
-    // backgroundColor: 'yellow',
-    textAlign: 'center',
-  },
-});
+// const styles = StyleSheet.create({});
 
 export default App;
