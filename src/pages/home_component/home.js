@@ -9,22 +9,22 @@ import {createStackNavigator} from '@react-navigation/stack';
 const Home = () => {
   const Drawer = createDrawerNavigator();
   const Stack = createStackNavigator();
-  const registerScreen = () => (
-    <Stack.Navigator>
-      <Stack.Screen name="signup" component={Signup} />
-      <Stack.Screen name="signin" component={SignIn} />
-    </Stack.Navigator>
-  );
+  // const registerScreen = () => (
+  //   <Stack.Navigator>
+  //     <Stack.Screen name="signup" component={Signup} />
+  //     <Stack.Screen name="signin" component={SignIn} />
+  //   </Stack.Navigator>
+  // );
+  // <NavigationContainer>
+  //   <Drawer.Navigator>
+  //     <Drawer.Screen name="Auth" children={registerScreen} />
+  //   </Drawer.Navigator>
+  // </NavigationContainer>
 
   return (
-    <>
-      <Text>from home</Text>
-      <NavigationContainer>
-        <Drawer.Navigator>
-          <Drawer.Screen name="Auth" children={registerScreen} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </>
+    <View>
+      <SignIn />
+    </View>
   );
 };
 

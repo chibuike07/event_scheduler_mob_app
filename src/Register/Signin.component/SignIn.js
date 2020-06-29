@@ -1,53 +1,67 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, TextInput, Button, FlatList} from 'react-native';
+import {Text, View, TextInput, Button, Alert} from 'react-native';
 import axios from 'axios';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
-  const [userData, setUserData] = useState(null);
+  const [httpResponse, setHttpResponse] = useState(null);
 
   let array = [];
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    let userNames;
+    //conditioniong the input values
+    if (email === '') {
+      alert('email must not be left empty');
+      return;
+    } else if (!email.includes('@' && '.')) {
+      Alert.alert('email', `@ or . missing`);
+      return;
+    } else if (password === '') {
+      Alert.alert('password', 'password must not be left empty');
+      return;
+    } else if (password.length < 8) {
+      Alert.alert('password', `password must be less than eight`);
+      return;
+    }
     let userEvent = {
-      event: password,
-      date: email,
+      email,
+      password,
     };
-    setUserData({userData: [...userData, userEvent]});
+    await axios
+      .post('http://192.168.43.22:5000/signincheck', userEvent)
+      .then(res => setHttpResponse(res.data))
+      .catch(err => console.error(err));
+
+    //comparing the user input values user authentication
+    const {isMatch, email: serverEmail, fullName} = httpResponse;
+    if (isMatch === true && serverEmail === email) {
+      Alert.alert('success', 'log in successful'); //alert if user is registered and getting the first name and last name
+      if (fullName) {
+        userNames = `${fullName}`;
+      }
+      sessionStorage.setItem('loggerName', JSON.stringify(userNames)); //setting the log in user name values to the session storage
+      // history.replace('/home'); //routing the logged in user to the home page
+      return;
+    } else {
+      alert('Email or Password incorrect'); // alert if user input values data does not match any registered users data
+      return;
+    }
   };
 
-  useEffect(() => {
-    const fetchData = () => {
-      axios
-        .get(' http://192.168.43.22:5000/scheduler/user_list')
-        .then(res => console.log('res.data', res.data))
-        .catch(err => console.error(err));
-    };
-    fetchData();
-  }, []);
   return (
     <View>
       <TextInput
-        value={password}
-        placeholder="add event"
-        onChangeText={text => setPass(text)}
-      />
-      <TextInput
         value={email}
-        placeholder="add date"
+        placeholder="add event"
         onChangeText={text => setEmail(text)}
       />
+      <TextInput
+        value={password}
+        placeholder="add date"
+        onChangeText={text => setPass(text)}
+      />
       <View>
-        <Button title="add event" onPress={() => handleSubmit()} />
-      </View>
-      <View>
-        {/* <FlatList
-          data={userData}
-          renderItem={({value}, i) => (
-            <Text key={i}>
-              {value.event} {value.date}
-            </Text>
-          )}
-        /> */}
+        <Button title="sign in" onPress={() => handleSubmit()} />
       </View>
     </View>
   );
