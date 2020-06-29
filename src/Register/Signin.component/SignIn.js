@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, TextInput, Button, Alert} from 'react-native';
+import {Text, View, TextInput, Button, Alert, StatusBar} from 'react-native';
 import axios from 'axios';
-const SignIn = () => {
+import {Actions} from 'react-native-router-flux';
+const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
   const [httpResponse, setHttpResponse] = useState(null);
 
-  let array = [];
   const handleSubmit = async () => {
     let userNames;
     //conditioniong the input values
@@ -32,15 +32,18 @@ const SignIn = () => {
       .then(res => setHttpResponse(res.data))
       .catch(err => console.error(err));
 
+    console.log('httpResponse', httpResponse);
     //comparing the user input values user authentication
     const {isMatch, email: serverEmail, fullName} = httpResponse;
+    console.log('isMatch', isMatch);
     if (isMatch === true && serverEmail === email) {
       Alert.alert('success', 'log in successful'); //alert if user is registered and getting the first name and last name
       if (fullName) {
         userNames = `${fullName}`;
       }
-      sessionStorage.setItem('loggerName', JSON.stringify(userNames)); //setting the log in user name values to the session storage
-      // history.replace('/home'); //routing the logged in user to the home page
+      console.log('userNames', userNames);
+      // sessionStorage.setItem('loggerName', JSON.stringify(userNames)); //setting the log in user name values to the session storage
+      navigation.navigate('Home'); //routing the logged in user to the home page
       return;
     } else {
       alert('Email or Password incorrect'); // alert if user input values data does not match any registered users data
@@ -52,16 +55,18 @@ const SignIn = () => {
     <View>
       <TextInput
         value={email}
-        placeholder="add event"
+        placeholder="add email"
         onChangeText={text => setEmail(text)}
       />
       <TextInput
         value={password}
-        placeholder="add date"
+        placeholder="add password"
         onChangeText={text => setPass(text)}
       />
+
       <View>
-        <Button title="sign in" onPress={() => handleSubmit()} />
+        <Button title="sign in" onPress={handleSubmit} />
+        <View></View>
       </View>
     </View>
   );
