@@ -2,17 +2,19 @@ import React from 'react';
 import Signup from './src/Register/SignUp.component/Signup';
 import SignIn from './src/Register/Signin.component/SignIn';
 import HomePage from './src/pages/home_component/home';
+import CreatEvent from './src/pages/create_event/add_event';
+import ViewEvent from './src/pages/view_event/view_event';
 import RegisterScreen from './src/Register/register.Screen';
-
-// import {Router, Scene, Stack} from 'react-native-router-flux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createAppContainer} from 'react-navigation';
 
 const App = () => {
-  const registerScreens = () => (
+  const HomeScreen = () => (
     <Drawer.Navigator>
-      {/* <Drawer.Screen name="Auth" children={re} /> */}
+      <Drawer.Screen name="create event" component={CreatEvent} />
+      <Drawer.Screen name="view event" component={ViewEvent} />
     </Drawer.Navigator>
   );
 
@@ -26,14 +28,12 @@ const App = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="register_page" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="signin" component={SignIn} />
         <Stack.Screen name="signup" component={Signup} />
+        <Stack.Screen name="Home" children={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
-// const styles = StyleSheet.create({});
 
 export default App;
