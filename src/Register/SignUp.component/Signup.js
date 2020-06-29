@@ -1,14 +1,22 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
-import {styles, name} from '../Styles.components/signup_styles';
+import {styles} from '../Styles.components/signup_styles';
 import axios from 'axios';
 import {useDimensions} from '@react-native-community/hooks';
+import {TouchableHighlight} from 'react-native-gesture-handler';
 
 const Signup = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState('');
+  const {
+    container,
+    login_button_text,
+    textinput,
+    touchableHighlight,
+    wrapper,
+  } = styles;
   const {screen} = useDimensions();
   const postEvents = async () => {
     if (fullName === '') {
@@ -42,44 +50,44 @@ const Signup = () => {
   //   https://medium.com/better-programming/managing-api-requests-http-https-in-react-native-using-axios-9ebf75cbca9b
 
   return (
-    <View
-      style={{
-        width: screen.width,
-        height: screen.height,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <View style={styles.view}>
-        {/* <Text style={styles.text}>Welcome to our sign up page</Text> */}
-        <View style={styles.container}>
+    <View style={container}>
+      <View style={wrapper}>
+        <View>
           <TextInput
-            style={styles.TextInput}
+            style={textinput}
             value={fullName}
             onChangeText={text => setFullName(text)}
             placeholder="add name"
+            placeholderTextColor={'#000'}
           />
           <TextInput
-            style={styles.TextInput}
+            style={textinput}
             value={email}
             onChangeText={text => setEmail(text)}
             placeholder="add email"
+            placeholderTextColor={'#000'}
           />
           <TextInput
-            style={styles.TextInput}
+            style={textinput}
             value={password}
             onChangeText={text => setPassword(text)}
             placeholder="add password"
+            placeholderTextColor={'#000'}
+            secureTextEntry={true}
           />
           <TextInput
-            style={styles.TextInput}
+            style={textinput}
             value={gender}
             onChangeText={text => setGender(text)}
             placeholder="gender"
+            placeholderTextColor={'#000'}
           />
         </View>
-      </View>
-      <View style={styles.buttonView}>
-        <Button title="sign up" onPress={postEvents} style={styles.button} />
+        <View style={styles.buttonView}>
+          <TouchableHighlight onPress={postEvents} style={touchableHighlight}>
+            <Text style={login_button_text}>sign up</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     </View>
   );

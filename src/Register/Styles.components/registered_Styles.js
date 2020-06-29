@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
   touchableOpacity: {
     width: 200,
-    backgroundColor: 'purple',
+    backgroundColor: 'rgb(0,102,102)',
     marginTop: 10,
     borderRadius: 20,
     height: 40,

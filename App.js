@@ -10,13 +10,11 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const App = () => {
-  // const registerScreens = () => (
-  //   <Stack.Navigator>
-  //   </Stack.Navigator>
-  //   // <Drawer.Navigator>
-  //   //   <Drawer.Screen name="Auth" children={registerScreen} />
-  //   // </Drawer.Navigator>
-  // );
+  const registerScreens = () => (
+    <Drawer.Navigator>
+      {/* <Drawer.Screen name="Auth" children={re} /> */}
+    </Drawer.Navigator>
+  );
 
   const Drawer = createDrawerNavigator();
   const Stack = createStackNavigator();

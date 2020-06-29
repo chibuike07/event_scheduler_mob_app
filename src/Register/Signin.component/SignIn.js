@@ -1,13 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, TextInput, Button, Alert, StatusBar} from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  Button,
+  Alert,
+  TouchableHighlight,
+} from 'react-native';
 import axios from 'axios';
-import {Actions} from 'react-native-router-flux';
 import {styles} from '../Styles.components/SignIn_styles';
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
   const [httpResponse, setHttpResponse] = useState(null);
-  const {container} = styles;
+  const {
+    container,
+    touchableHighlight,
+    login_button_text,
+    wrapper,
+    textinput,
+  } = styles;
 
   const handleSubmit = async () => {
     let userNames;
@@ -43,7 +55,6 @@ const SignIn = ({navigation}) => {
       if (fullName) {
         userNames = `${fullName}`;
       }
-      console.log('userNames', userNames);
       // sessionStorage.setItem('loggerName', JSON.stringify(userNames)); //setting the log in user name values to the session storage
       navigation.navigate('Home'); //routing the logged in user to the home page
       return;
@@ -55,20 +66,32 @@ const SignIn = ({navigation}) => {
 
   return (
     <View style={container}>
-      <TextInput
-        value={email}
-        placeholder="add email"
-        onChangeText={text => setEmail(text)}
-      />
-      <TextInput
-        value={password}
-        placeholder="add password"
-        onChangeText={text => setPass(text)}
-      />
-
-      <View>
-        <Button title="sign in" onPress={handleSubmit} />
-        <View></View>
+      <View style={wrapper}>
+        <View>
+          <TextInput
+            value={email}
+            placeholder="add email"
+            onChangeText={text => setEmail(text)}
+            style={textinput}
+            placeholderTextColor={'#000'}
+          />
+          <TextInput
+            value={password}
+            placeholder="add password"
+            onChangeText={text => setPass(text)}
+            style={textinput}
+            placeholderTextColor={'#000'}
+            secureTextEntry={true}
+          />
+        </View>
+        <View>
+          <TouchableHighlight
+            title="sign in"
+            onPress={handleSubmit}
+            style={touchableHighlight}>
+            <Text style={login_button_text}>Log in</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     </View>
   );
