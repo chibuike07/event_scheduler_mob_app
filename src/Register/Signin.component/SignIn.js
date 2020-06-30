@@ -12,7 +12,6 @@ import {styles} from '../Styles.components/SignIn_styles';
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
-  const [httpResponse, setHttpResponse] = useState(null);
   const {
     container,
     touchableHighlight,
@@ -22,62 +21,55 @@ const SignIn = ({navigation}) => {
   } = styles;
 
   const handleSubmit = async () => {
-    let userNames;
-    //conditioniong the input values
+    //conditioning the input values
     if (email === '') {
-      alert('email must not be left empty');
+      Alert.alert('Email Field', 'Email must not be left empty');
       return;
     } else if (!email.includes('@' && '.')) {
-      Alert.alert('email', `@ or . missing`);
+      Alert.alert('Email Field', `@ or . missing`);
       return;
     } else if (password === '') {
-      Alert.alert('password', 'password must not be left empty');
+      Alert.alert('Password Field', 'Password must not be left empty');
       return;
     } else if (password.length < 8) {
-      Alert.alert('password', `password must be less than eight`);
+      Alert.alert('Password Field', `Password must be less than eight`);
       return;
     }
     let userEvent = {
       email,
       password,
     };
+
     await axios
       .post('http://192.168.43.22:5000/signincheck', userEvent)
-      .then(res => setHttpResponse(res.data))
+      .then(res => {
+        // comparing the user input values user authentication
+        let {isMatch, email: serverEmail, fullName} = res.data;
+        if (isMatch === false) {
+          Alert.alert('Sign In', 'Email or Password incorrect');
+        } else {
+          Alert.alert('Success', 'Log in successful'); //alert if user is registered and getting the first name and last name
+          if (fullName) {
+            navigation.navigate('Home', {fullName: 'fullName'}); //routing the logged in user to the Event page
+          }
+        }
+      })
       .catch(err => console.error(err));
-
-    console.log('httpResponse', httpResponse);
-    //comparing the user input values user authentication
-    const {isMatch, email: serverEmail, fullName} = httpResponse;
-    console.log('isMatch', isMatch);
-    if (isMatch === true && serverEmail === email) {
-      Alert.alert('success', 'log in successful'); //alert if user is registered and getting the first name and last name
-      if (fullName) {
-        userNames = `${fullName}`;
-      }
-      // sessionStorage.setItem('loggerName', JSON.stringify(userNames)); //setting the log in user name values to the session storage
-      navigation.navigate('Home'); //routing the logged in user to the home page
-      return;
-    } else {
-      alert('Email or Password incorrect'); // alert if user input values data does not match any registered users data
-      return;
-    }
   };
-
   return (
     <View style={container}>
       <View style={wrapper}>
         <View>
           <TextInput
             value={email}
-            placeholder="add email"
+            placeholder="Email"
             onChangeText={text => setEmail(text)}
             style={textinput}
             placeholderTextColor={'#000'}
           />
           <TextInput
             value={password}
-            placeholder="add password"
+            placeholder="Password"
             onChangeText={text => setPass(text)}
             style={textinput}
             placeholderTextColor={'#000'}
