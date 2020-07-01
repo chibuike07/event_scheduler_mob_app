@@ -83,6 +83,8 @@ target 'learn_react_native' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'learn_react_nativeTests' do
     inherit! :complete
     # Pods for testing

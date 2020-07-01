@@ -44,13 +44,13 @@ const SignIn = ({navigation}) => {
       .post('http://192.168.43.22:5000/signincheck', userEvent)
       .then(res => {
         // comparing the user input values user authentication
-        let {isMatch, email: serverEmail, fullName} = res.data;
+        let {isMatch, fullName} = res.data;
         if (isMatch === false) {
           Alert.alert('Sign In', 'Email or Password incorrect');
         } else {
           Alert.alert('Success', 'Log in successful'); //alert if user is registered and getting the first name and last name
           if (fullName) {
-            navigation.navigate('Home', {fullName: 'fullName'}); //routing the logged in user to the Event page
+            navigation.replace('Home', fullName); //routing the logged in user to the Event page
           }
         }
       })
