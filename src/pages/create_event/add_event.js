@@ -14,7 +14,6 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const add_event = ({route}) => {
   const [title, handleTitle] = useState('');
-  const [currentDate, handleCurrentDate] = useState();
   const [reminderDate, handleReminderDate] = useState('');
   const [description, handleDescription] = useState('');
   const {
@@ -25,6 +24,7 @@ const add_event = ({route}) => {
     textinputmask,
   } = styles;
   const handleSubmit = async () => {
+    const {fullName} = route.params;
     if (title === '') {
       Alert.alert('Title', 'Title is required');
       return;
@@ -37,9 +37,9 @@ const add_event = ({route}) => {
     }
     let eventDetail = {
       title,
-      currentDate,
       reminderDate,
       description,
+      fullName,
     };
 
     await axios
@@ -60,20 +60,11 @@ const add_event = ({route}) => {
           style={textinput}
           value={title}
           onChangeText={text => handleTitle(text)}
-          placeholder="title"
+          placeholder="Title"
           placeholderTextColor="#fff"
           underlineColorAndroid="rgb(0,102,102)"
         />
-        <TextInputMask
-          style={textinputmask}
-          type={'datetime'}
-          options={{format: 'DD/MM/YYYY HH:MM:SS'}}
-          value={currentDate}
-          onChangeText={text => handleCurrentDate(text)}
-          underlineColorAndroid="rgb(0,102,102)"
-          placeholder="Current date DD/MM/YYYY HH:MM:SS"
-          placeholderTextColor="#fff"
-        />
+
         <TextInputMask
           style={textinputmask}
           type={'datetime'}
@@ -81,7 +72,7 @@ const add_event = ({route}) => {
           value={reminderDate}
           onChangeText={text => handleReminderDate(text)}
           underlineColorAndroid="rgb(0,102,102)"
-          placeholder="event date eg DD/MM/YYYY HH:MM:SS"
+          placeholder="DD/MM/YYYY HH:MM:SS"
           placeholderTextColor="#fff"
         />
         <TextInput
@@ -90,7 +81,7 @@ const add_event = ({route}) => {
           multiline={true}
           numberOfLines={5}
           onChangeText={text => handleDescription(text)}
-          placeholder="description"
+          placeholder="Description"
           underlineColorAndroid="rgb(0,102,102)"
           placeholderTextColor="#fff"
         />

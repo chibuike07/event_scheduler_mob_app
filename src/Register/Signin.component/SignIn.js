@@ -50,7 +50,7 @@ const SignIn = ({navigation}) => {
         } else {
           Alert.alert('Success', 'Log in successful'); //alert if user is registered and getting the first name and last name
           if (fullName) {
-            navigation.replace('Home', fullName); //routing the logged in user to the Event page
+            navigation.navigate('Home', {fullName}); //routing the logged in user to the Event page
           }
         }
       })
