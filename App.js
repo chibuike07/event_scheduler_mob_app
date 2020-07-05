@@ -37,11 +37,29 @@ const App = () => {
         <Stack.Screen
           name="Home"
           component={HomePage}
-          options={{headerShown: null}}
+          options={{title: 'Home'}}
         />
-        <Stack.Screen name="Event" component={CreatEvent} />
-        <Stack.Screen name="view event" component={ViewEvent} />
-        <Stack.Screen name="Modify" component={Modify} />
+        <Stack.Screen
+          name="Event"
+          component={CreatEvent}
+          options={{
+            title: 'Add Event',
+          }}
+        />
+        <Stack.Screen
+          name="view event"
+          component={ViewEvent}
+          options={{
+            title: 'My Events',
+          }}
+        />
+        <Stack.Screen
+          name="Modify"
+          component={Modify}
+          options={{
+            title: 'Update Event',
+          }}
+        />
         <Stack.Screen name="List" component={List} />
       </Stack.Navigator>
     </NavigationContainer>

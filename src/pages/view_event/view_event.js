@@ -28,22 +28,35 @@ const view_event = ({route, navigation}) => {
       style={container}
       start={{x: 2, y: 1}}
       end={{x: 1, y: 2}}>
-      <FlatList
-        data={viewEvent}
-        renderItem={({item, index, separators}) => (
-          <EventList
-            title={item.title}
-            desc={item.description}
-            date={item.reminderDate}
-            id={item._id}
-            eventWrapper={eventWrapper}
-            text={text}
-            navigation={navigation}
-            route={route}
-          />
-        )}
-        keyExtractor={item => item._id}
-      />
+      {viewEvent.length < 1 ? (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 25, color: '#fff'}}>
+            OOOPS!!! NO EVENT YET!!!
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={viewEvent}
+          renderItem={({item, index, separators}) => (
+            <EventList
+              title={item.title}
+              desc={item.description}
+              date={item.reminderDate}
+              id={item._id}
+              eventWrapper={eventWrapper}
+              text={text}
+              navigation={navigation}
+              route={route}
+            />
+          )}
+          keyExtractor={item => item._id}
+        />
+      )}
     </LinearGradient>
   );
 };

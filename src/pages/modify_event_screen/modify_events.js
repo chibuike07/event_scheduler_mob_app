@@ -80,11 +80,11 @@ const modify_events = ({route, navigation}) => {
         <TextInputMask
           style={textinputmask}
           type={'datetime'}
-          options={{format: 'MM/DD/YYYY HH:MM:SS'}}
+          options={{format: 'DD/MM/YYYY HH:MM:SS'}}
           value={reminderDate}
           onChangeText={text => handleReminderDate(text)}
           underlineColorAndroid="rgb(0,102,102)"
-          placeholder="MM/DD/YYYY HH:MM:SS"
+          placeholder="DD/MM/YYYY HH:MM:SS"
           placeholderTextColor="#fff"
         />
         <TextInput

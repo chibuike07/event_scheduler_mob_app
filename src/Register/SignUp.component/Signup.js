@@ -18,16 +18,22 @@ const Signup = ({navigation}) => {
   } = styles;
   const postEvents = async () => {
     if (fullName === '') {
-      Alert.alert('input', 'full name must not be left empty');
+      Alert.alert('input', 'Name is required');
       return;
     } else if (email === '') {
-      Alert.alert('input', `email must not be left empty`);
+      Alert.alert('input', `Email is required`);
+      return;
+    } else if (!email.includes('@' && '.')) {
+      Alert.alert('Email Field', `@ or . missing`);
+      return;
+    } else if (password === '') {
+      Alert.alert('input', 'Password is required');
+      return;
+    } else if (password.length < 8) {
+      Alert.alert('Password', 'Password is required');
       return;
     } else if (gender === '') {
-      Alert.alert('input', 'gender must not be left empty');
-      return;
-    } else if (gender === '') {
-      Alert.alert('input', 'gender is required');
+      Alert.alert('input', 'Gender is required');
     }
     let userObject = {
       fullName,

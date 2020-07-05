@@ -10,11 +10,13 @@ const event_list = ({
   eventWrapper,
   text,
   navigation,
+
   route,
 }) => {
   const [data, setData] = useState([]);
   let stringDate = date.split(' ').slice(0, 3);
   const {fullName} = route.params;
+
   const clickOptions = () => [
     Alert.alert('Event list', 'reschedule event', [
       {text: 'NO'},
