@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
+import {Text, View, TextInput, Button, Alert} from 'react-native';
 import {styles} from '../Styles.components/signup_styles';
 import axios from 'axios';
-import {useDimensions} from '@react-native-community/hooks';
 import {TouchableHighlight} from 'react-native-gesture-handler';
 
-const Signup = () => {
+const Signup = ({navigation}) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +16,6 @@ const Signup = () => {
     touchableHighlight,
     wrapper,
   } = styles;
-  const {screen} = useDimensions();
   const postEvents = async () => {
     if (fullName === '') {
       Alert.alert('input', 'full name must not be left empty');
@@ -37,7 +35,7 @@ const Signup = () => {
       password,
       gender,
     };
-    console.log('userObject', userObject);
+
     axios
       .post('http://192.168.43.22:5000/scheduler/users', userObject)
       .then(res => {
@@ -47,7 +45,6 @@ const Signup = () => {
       })
       .catch(err => console.log(err));
   };
-  //   https://medium.com/better-programming/managing-api-requests-http-https-in-react-native-using-axios-9ebf75cbca9b
 
   return (
     <View style={container}>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import {styles} from './view_event_screen';
 import LinearGradient from 'react-native-linear-gradient';
 
-const view_event = ({route}) => {
+const view_event = ({route, navigation}) => {
   const [viewEvent, handleSetViewEvent] = useState([]);
   const {container, eventWrapper, text} = styles;
   useEffect(() => {
@@ -38,6 +38,8 @@ const view_event = ({route}) => {
             id={item._id}
             eventWrapper={eventWrapper}
             text={text}
+            navigation={navigation}
+            route={route}
           />
         )}
         keyExtractor={item => item._id}

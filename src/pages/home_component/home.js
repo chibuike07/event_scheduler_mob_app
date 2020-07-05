@@ -1,32 +1,28 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {createStackNavigator} from '@react-navigation/stack';
-import CreatEvent from '../create_event/add_event';
-import ViewEvent from '../view_event/view_event';
-const StacK = createStackNavigator();
-const Drawer = createDrawerNavigator();
+import {StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import {styles} from '../create_event/add_event_styles';
+import LinearGradient from 'react-native-linear-gradient';
 
-const home = ({route}) => {
-  const EventScreen = () => (
-    <Drawer.Navigator>
-      <Drawer.Screen
-        name="add event"
-        component={CreatEvent}
-        initialParams={route.params}
-      />
-      <Drawer.Screen
-        name="view event"
-        component={ViewEvent}
-        initialParams={route.params}
-      />
-    </Drawer.Navigator>
-  );
+const home = ({route, navigation}) => {
+  const {container, touchableHighlight, text} = styles;
+  const {fullName} = route.params;
   return (
-    <StacK.Navigator>
-      <StacK.Screen name="event" children={EventScreen} />
-    </StacK.Navigator>
+    <LinearGradient
+      colors={['#008080', '#004c4c', '#66b2b2']}
+      style={container}
+      start={{x: 2, y: 1}}
+      end={{x: 1, y: 2}}>
+      <TouchableHighlight
+        style={touchableHighlight}
+        onPress={() => navigation.navigate('Event', {fullName})}>
+        <Text style={text}>add event</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={touchableHighlight}
+        onPress={() => navigation.navigate('view event', {fullName})}>
+        <Text style={text}>view event</Text>
+      </TouchableHighlight>
+    </LinearGradient>
   );
 };
 export default home;
-const styles = StyleSheet.create({});

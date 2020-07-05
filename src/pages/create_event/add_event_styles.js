@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 10,
   },
   text: {
     color: '#fff',

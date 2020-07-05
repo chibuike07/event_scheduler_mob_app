@@ -1,14 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  Button,
-  Alert,
-  TouchableHighlight,
-} from 'react-native';
+import {Text, View, TextInput, Alert, TouchableHighlight} from 'react-native';
 import axios from 'axios';
 import {styles} from '../Styles.components/SignIn_styles';
+
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
@@ -48,7 +42,7 @@ const SignIn = ({navigation}) => {
         if (isMatch === false) {
           Alert.alert('Sign In', 'Email or Password incorrect');
         } else {
-          Alert.alert('Success', 'Log in successful'); //alert if user is registered and getting the first name and last name
+          Alert.alert('Success', 'Log in successful'); //alert if user is registered and getting the first name
           if (fullName) {
             navigation.navigate('Home', {fullName}); //routing the logged in user to the Event page
           }

@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Alert,
-  TouchableHighlight,
-} from 'react-native';
+import {Text, View, TextInput, Alert, TouchableHighlight} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import axios from 'axios';
 import {styles} from './add_event_styles';
@@ -68,11 +61,11 @@ const add_event = ({route}) => {
         <TextInputMask
           style={textinputmask}
           type={'datetime'}
-          options={{format: 'DD/MM/YYYY HH:MM:SS'}}
+          options={{format: 'MM/DD/YYYY HH:MM:SS'}}
           value={reminderDate}
           onChangeText={text => handleReminderDate(text)}
           underlineColorAndroid="rgb(0,102,102)"
-          placeholder="DD/MM/YYYY HH:MM:SS"
+          placeholder="MM/DD/YYYY HH:MM:SS"
           placeholderTextColor="#fff"
         />
         <TextInput
