@@ -6,6 +6,7 @@ import CreatEvent from './src//pages/create_event/add_event';
 import ViewEvent from './src/pages/view_event/view_event';
 import Modify from './src/pages/modify_event_screen/modify_events';
 import List from './src/pages/view_event/event_list';
+import Splash from './src//pages/splash_screen/splash_screen';
 import RegisterScreen from './src/Register/register.Screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -19,6 +20,11 @@ const App = () => {
         screenOptions={{
           headerShown: true,
         }}>
+        <Stack.Screen
+          name="splash"
+          component={Splash}
+          options={{headerShown: null}}
+        />
         <Stack.Screen
           name="register_page"
           component={RegisterScreen}
@@ -60,7 +66,7 @@ const App = () => {
             title: 'Update Event',
           }}
         />
-        <Stack.Screen name="List" component={List} />
+        <Stack.Screen name="splash_screen" component={List} />
       </Stack.Navigator>
     </NavigationContainer>
   );
