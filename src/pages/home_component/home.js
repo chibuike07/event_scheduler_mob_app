@@ -15,12 +15,12 @@ const home = ({route, navigation}) => {
       <TouchableHighlight
         style={touchableHighlight}
         onPress={() => navigation.navigate('Event', {fullName})}>
-        <Text style={text}>add event</Text>
+        <Text style={text}>Add Event</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={touchableHighlight}
         onPress={() => navigation.navigate('view event', {fullName})}>
-        <Text style={text}>view event</Text>
+        <Text style={text}>View Event</Text>
       </TouchableHighlight>
     </LinearGradient>
   );

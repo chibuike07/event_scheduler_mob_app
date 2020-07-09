@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 const modify_events = ({route, navigation}) => {
   const [title, handleTitle] = useState('');
   const [reminderDate, handleReminderDate] = useState('');
+  const [reminderTime, handleReminderTime] = useState('');
   const [description, handleDescription] = useState('');
   const [id, handleId] = useState('');
   const [data, setData] = useState([]);
@@ -27,6 +28,7 @@ const modify_events = ({route, navigation}) => {
     let eventDetail = {
       title,
       reminderDate,
+      reminderTime,
       description,
     };
     let res =
@@ -49,10 +51,11 @@ const modify_events = ({route, navigation}) => {
   };
 
   useEffect(() => {
-    const {title, id, desc, date} = route.params;
+    const {title, id, desc, date, time} = route.params;
     handleTitle(title);
     handleDescription(desc);
     handleReminderDate(date);
+    handleReminderTime(time);
     handleId(id);
     const fetchData = async () => {
       await axios
@@ -60,6 +63,7 @@ const modify_events = ({route, navigation}) => {
         .then(res => setData(res.data));
     };
     fetchData();
+    console.log('dateModify', date);
   }, [route]);
   return (
     <LinearGradient
@@ -76,15 +80,24 @@ const modify_events = ({route, navigation}) => {
           placeholderTextColor="#fff"
           underlineColorAndroid="rgb(0,102,102)"
         />
-
         <TextInputMask
           style={textinputmask}
           type={'datetime'}
-          options={{format: 'DD/MM/YYYY HH:MM:SS'}}
+          options={{format: 'MM/DD/YYYY'}}
           value={reminderDate}
           onChangeText={text => handleReminderDate(text)}
           underlineColorAndroid="rgb(0,102,102)"
-          placeholder="DD/MM/YYYY HH:MM:SS"
+          placeholder="MM/DD/YYYY"
+          placeholderTextColor="#fff"
+        />
+        <TextInputMask
+          style={textinputmask}
+          type={'datetime'}
+          options={{format: 'HH:MM:SS'}}
+          value={reminderTime}
+          onChangeText={text => handleReminderTime(text)}
+          underlineColorAndroid="rgb(0,102,102)"
+          placeholder="HH:MM:SS"
           placeholderTextColor="#fff"
         />
         <TextInput

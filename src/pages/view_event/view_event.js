@@ -47,6 +47,7 @@ const view_event = ({route, navigation}) => {
               title={item.title}
               desc={item.description}
               date={item.reminderDate}
+              time={item.reminderTime}
               id={item._id}
               eventWrapper={eventWrapper}
               text={text}

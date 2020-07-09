@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 const add_event = ({route}) => {
   const [title, handleTitle] = useState('');
   const [reminderDate, handleReminderDate] = useState('');
+  const [reminderTime, handleReminderTime] = useState('');
   const [description, handleDescription] = useState('');
   const {
     container,
@@ -31,6 +32,7 @@ const add_event = ({route}) => {
     let eventDetail = {
       title,
       reminderDate,
+      reminderTime,
       description,
       fullName,
     };
@@ -61,11 +63,21 @@ const add_event = ({route}) => {
         <TextInputMask
           style={textinputmask}
           type={'datetime'}
-          options={{format: 'MM/DD/YYYY HH:MM:SS'}}
+          options={{format: 'MM/DD/YYYY'}}
           value={reminderDate}
           onChangeText={text => handleReminderDate(text)}
           underlineColorAndroid="rgb(0,102,102)"
-          placeholder="MM/DD/YYYY HH:MM:SS"
+          placeholder="MM/DD/YYYY"
+          placeholderTextColor="#fff"
+        />
+        <TextInputMask
+          style={textinputmask}
+          type={'datetime'}
+          options={{format: 'HH:MM:SS'}}
+          value={reminderTime}
+          onChangeText={text => handleReminderTime(text)}
+          underlineColorAndroid="rgb(0,102,102)"
+          placeholder="HH:MM:SS"
           placeholderTextColor="#fff"
         />
         <TextInput
@@ -80,7 +92,7 @@ const add_event = ({route}) => {
         />
         <View>
           <TouchableHighlight style={touchableHighlight} onPress={handleSubmit}>
-            <Text style={text}>add event</Text>
+            <Text style={text}>Add Event</Text>
           </TouchableHighlight>
         </View>
       </View>

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableHighlight, Alert, Button} from 'react-native';
+import {View, Text, TouchableHighlight, Alert} from 'react-native';
 import axios from 'axios';
 
 const event_list = ({
@@ -7,18 +7,37 @@ const event_list = ({
   desc,
   id,
   date,
+  time,
   eventWrapper,
   text,
   navigation,
-
   route,
 }) => {
   const [data, setData] = useState([]);
-  let stringDate = date.split(' ').slice(0, 3);
+  let weekDay = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+  let months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  let day = weekDay[new Date(date).getDay()];
+  let month = months[new Date(date).getMonth()];
+  let dateNum = new Date(date).getDate();
+  let dateString = `${month} ${day} ${dateNum}`;
+  console.log(dateString);
   const {fullName} = route.params;
 
   const clickOptions = () => [
-    Alert.alert('Event list', 'reschedule event', [
+    Alert.alert('Event List', 'Reschedule Event', [
       {text: 'NO'},
       {
         text: 'Yes',
@@ -27,11 +46,12 @@ const event_list = ({
             title,
             date,
             desc,
+            time,
             id,
             fullName,
           }),
       },
-      {text: 'delete event', onPress: () => deleteEvent()},
+      {text: 'Delete Event', onPress: () => deleteEvent()},
     ]),
   ];
 
@@ -65,7 +85,9 @@ const event_list = ({
     <View>
       <TouchableHighlight style={eventWrapper} onPress={() => clickOptions()}>
         <View>
-          <Text style={text}>{stringDate.join(' ')}</Text>
+          <Text style={text}>
+            {dateString} {time}
+          </Text>
           <Text>{title}</Text>
           <Text numberOfLines={10}>{desc}</Text>
         </View>
