@@ -88,7 +88,7 @@ const Signup = ({navigation}) => {
         </View>
         <View style={styles.buttonView}>
           <TouchableHighlight onPress={postEvents} style={touchableHighlight}>
-            <Text style={login_button_text}>sign up</Text>
+            <Text style={login_button_text}>Sign Up</Text>
           </TouchableHighlight>
         </View>
       </View>

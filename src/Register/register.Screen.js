@@ -10,14 +10,14 @@ const RegisterScreen = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('signin')}
           style={touchableOpacity}>
-          <Text style={text}>sign in</Text>
+          <Text style={text}>Sign In</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           title="Sign up"
           onPress={() => navigation.navigate('signup')}
           style={touchableOpacity}>
-          <Text style={text}>Sign up</Text>
+          <Text style={text}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     </View>

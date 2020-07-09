@@ -5,7 +5,6 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const home = ({route, navigation}) => {
   const {container, touchableHighlight, text} = styles;
-  const {fullName} = route.params;
   return (
     <LinearGradient
       colors={['#008080', '#004c4c', '#66b2b2']}
@@ -14,12 +13,12 @@ const home = ({route, navigation}) => {
       end={{x: 1, y: 2}}>
       <TouchableHighlight
         style={touchableHighlight}
-        onPress={() => navigation.navigate('Event', {fullName})}>
+        onPress={() => navigation.navigate('Event')}>
         <Text style={text}>Add Event</Text>
       </TouchableHighlight>
       <TouchableHighlight
         style={touchableHighlight}
-        onPress={() => navigation.navigate('view event', {fullName})}>
+        onPress={() => navigation.navigate('view event')}>
         <Text style={text}>View Event</Text>
       </TouchableHighlight>
     </LinearGradient>

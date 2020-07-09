@@ -71,11 +71,8 @@ const SignIn = ({navigation}) => {
           />
         </View>
         <View>
-          <TouchableHighlight
-            title="sign in"
-            onPress={handleSubmit}
-            style={touchableHighlight}>
-            <Text style={login_button_text}>Log in</Text>
+          <TouchableHighlight onPress={handleSubmit} style={touchableHighlight}>
+            <Text style={login_button_text}>Log In</Text>
           </TouchableHighlight>
         </View>
       </View>

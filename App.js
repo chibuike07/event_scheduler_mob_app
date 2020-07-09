@@ -1,10 +1,8 @@
 import React from 'react';
+import {View, Text} from 'react-native';
 import Signup from './src/Register/SignUp.component/Signup';
 import SignIn from './src/Register/Signin.component/SignIn';
-import HomePage from './src/pages/home_component/home';
-import CreatEvent from './src//pages/create_event/add_event';
-import ViewEvent from './src/pages/view_event/view_event';
-import Modify from './src/pages/modify_event_screen/modify_events';
+import homeScreen from './src//pages/home_component/homeScreen';
 import List from './src/pages/view_event/event_list';
 import Splash from './src//pages/splash_screen/splash_screen';
 import RegisterScreen from './src/Register/register.Screen';
@@ -42,29 +40,21 @@ const App = () => {
         />
         <Stack.Screen
           name="Home"
-          component={HomePage}
-          options={{title: 'Home'}}
-        />
-        <Stack.Screen
-          name="Event"
-          component={CreatEvent}
-          options={{
-            title: 'Add Event',
-          }}
-        />
-        <Stack.Screen
-          name="view event"
-          component={ViewEvent}
-          options={{
-            title: 'My Events',
-          }}
-        />
-        <Stack.Screen
-          name="Modify"
-          component={Modify}
-          options={{
-            title: 'Update Event',
-          }}
+          component={homeScreen}
+          options={({route}) => (
+            {title: 'My Event'},
+            {
+              headerRight: () => (
+                <View style={{padding: 10}}>
+                  <Text
+                    style={{color: '#000', fontWeight: 'bold', fontSize: 15}}>
+                    {route.params.fullName}
+                  </Text>
+                </View>
+              ),
+              headerTintColor: '#000',
+            }
+          )}
         />
         <Stack.Screen name="splash_screen" component={List} />
       </Stack.Navigator>

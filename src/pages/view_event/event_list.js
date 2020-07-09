@@ -33,7 +33,6 @@ const event_list = ({
   let month = months[new Date(date).getMonth()];
   let dateNum = new Date(date).getDate();
   let dateString = `${month} ${day} ${dateNum}`;
-  console.log(dateString);
   const {fullName} = route.params;
 
   const clickOptions = () => [
@@ -89,7 +88,7 @@ const event_list = ({
             {dateString} {time}
           </Text>
           <Text>{title}</Text>
-          <Text numberOfLines={10}>{desc}</Text>
+          <Text numberOfLines={5}>{desc}</Text>
         </View>
       </TouchableHighlight>
     </View>
