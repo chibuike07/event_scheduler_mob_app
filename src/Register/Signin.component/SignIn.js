@@ -44,13 +44,13 @@ const SignIn = ({navigation}) => {
         } else if (res.status === 200) {
           Alert.alert('Success', 'Log in successful'); //alert if user is registered and getting the first name
           if (fullName) {
-            navigation.navigate('Home', {fullName}); //routing the logged in user to the Event page
+            navigation.replace('Home', {fullName}); //routing the logged in user to the Event page
           }
         } else if (res.status === 500) {
-          console.log('server error');
+          Alert.alert('server error', 'User does not exist');
         }
       })
-      .catch(err => console.error(err));
+      .catch(err => err);
   };
   return (
     <View style={container}>

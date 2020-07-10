@@ -12,14 +12,27 @@ const modify_events = ({route, navigation}) => {
   const [description, handleDescription] = useState('');
   const [id, handleId] = useState('');
   const [data, setData] = useState([]);
+  const [isValidDate, setIsValidDate] = useState();
+  const [isValidTime, setIsValidTime] = useState();
   const {textinput, textinputmask, container, text} = styles;
 
-  const handleModify = async () => {
+  const handleModify = () => {
+    let validDate = isValidDate.isValid();
+    let validTime = isValidTime.isValid();
     if (title === '') {
       Alert.alert('Title', 'Title is required');
       return;
     } else if (reminderDate === '') {
       Alert.alert('Event date', 'Event date is required');
+      return;
+    } else if (validDate !== true) {
+      Alert.alert('Event Date', 'Date is invalid');
+      return;
+    } else if (reminderTime === '') {
+      Alert.alert('Time', 'Time is required');
+      return;
+    } else if (validTime !== true) {
+      Alert.alert('Time', 'Time is invalid');
       return;
     } else if (description === '') {
       Alert.alert('Description', 'Description field is required');
@@ -47,7 +60,7 @@ const modify_events = ({route, navigation}) => {
       );
     });
     Alert.alert('Event Update', 'Event updated successfully');
-    navigation.navigate('Home');
+    navigation.replace('Activity');
   };
 
   useEffect(() => {
@@ -63,7 +76,6 @@ const modify_events = ({route, navigation}) => {
         .then(res => setData(res.data));
     };
     fetchData();
-    console.log('dateModify', date);
   }, [route]);
   return (
     <LinearGradient
@@ -89,16 +101,18 @@ const modify_events = ({route, navigation}) => {
           underlineColorAndroid="rgb(0,102,102)"
           placeholder="MM/DD/YYYY"
           placeholderTextColor="#fff"
+          ref={ref => setIsValidDate(ref)}
         />
         <TextInputMask
           style={textinputmask}
           type={'datetime'}
-          options={{format: 'HH:MM:SS'}}
+          options={{format: 'HH:mm:ss'}}
           value={reminderTime}
           onChangeText={text => handleReminderTime(text)}
           underlineColorAndroid="rgb(0,102,102)"
           placeholder="HH:MM:SS"
           placeholderTextColor="#fff"
+          ref={ref => setIsValidTime(ref)}
         />
         <TextInput
           style={textinput}

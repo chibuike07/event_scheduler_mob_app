@@ -21,7 +21,7 @@ const view_event = ({route, navigation}) => {
         });
     };
     fetchEvent();
-  }, []);
+  }, [route]);
   return (
     <LinearGradient
       colors={['#008080', '#004c4c', '#66b2b2']}

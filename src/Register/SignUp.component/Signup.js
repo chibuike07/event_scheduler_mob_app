@@ -45,11 +45,12 @@ const Signup = ({navigation}) => {
     axios
       .post('http://192.168.43.22:5000/scheduler/users', userObject)
       .then(res => {
-        if (res.data.status) {
-          console.log('response', response);
+        if (res.status === 200) {
+          Alert.alert('Success', 'Tnanks for signing with us');
+          navigation.replace('signin');
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => err);
   };
 
   return (

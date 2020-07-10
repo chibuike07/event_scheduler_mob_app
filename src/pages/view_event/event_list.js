@@ -14,29 +14,13 @@ const event_list = ({
   route,
 }) => {
   const [data, setData] = useState([]);
-  let weekDay = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
-  let months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-  let day = weekDay[new Date(date).getDay()];
-  let month = months[new Date(date).getMonth()];
-  let dateNum = new Date(date).getDate();
-  let dateString = `${month} ${day} ${dateNum}`;
+
+  let dateString = new Date(date).toDateString();
   const {fullName} = route.params;
 
   const clickOptions = () => [
     Alert.alert('Event List', 'Reschedule Event', [
+      {text: 'Delete Event', onPress: () => deleteEvent()},
       {text: 'NO'},
       {
         text: 'Yes',
@@ -50,7 +34,6 @@ const event_list = ({
             fullName,
           }),
       },
-      {text: 'Delete Event', onPress: () => deleteEvent()},
     ]),
   ];
 
@@ -69,6 +52,7 @@ const event_list = ({
         'http://192.168.43.22:5000/scheduler/user_list/' + value._id,
         value,
       );
+      navigation.replace('view event');
     });
   };
 
@@ -83,7 +67,7 @@ const event_list = ({
   return (
     <View>
       <TouchableHighlight style={eventWrapper} onPress={() => clickOptions()}>
-        <View>
+        <View style={eventWrapper}>
           <Text style={text}>
             {dateString} {time}
           </Text>
