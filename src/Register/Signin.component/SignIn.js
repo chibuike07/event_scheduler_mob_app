@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Text, View, TextInput, Alert, TouchableHighlight} from 'react-native';
 import axios from 'axios';
 import {styles} from '../Styles.components/SignIn_styles';
-
+import AsyncStorage from '@react-native-community/async-storage';
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
@@ -38,16 +38,18 @@ const SignIn = ({navigation}) => {
       .post('http://192.168.43.22:5000/signincheck', userEvent)
       .then(res => {
         // comparing the user input values user authentication
+        // console.log('res.data', res.data)
         let {fullName} = res.data;
         if (res.data.statusr === 401) {
           Alert.alert('Sign In', 'Email or Password incorrect');
+        } else if (res.data.error === 401) {
+          Alert.alert('Sign In', 'Email or Password incorrect');
         } else if (res.status === 200) {
+          AsyncStorage.setItem('token', res.data.token);
           Alert.alert('Success', 'Log in successful'); //alert if user is registered and getting the first name
           if (fullName) {
             navigation.replace('Home', {fullName}); //routing the logged in user to the Event page
           }
-        } else if (res.status === 500) {
-          Alert.alert('server error', 'User does not exist');
         }
       })
       .catch(err => err);
