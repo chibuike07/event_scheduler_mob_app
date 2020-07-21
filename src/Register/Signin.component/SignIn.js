@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Text, View, TextInput, Alert, TouchableHighlight} from 'react-native';
 import axios from 'axios';
 import {styles} from '../Styles.components/SignIn_styles';
@@ -38,22 +38,24 @@ const SignIn = ({navigation}) => {
       .post('http://192.168.43.22:5000/signincheck', userEvent)
       .then(res => {
         // comparing the user input values user authentication
-        // console.log('res.data', res.data)
         let {fullName} = res.data;
         if (res.data.statusr === 401) {
           Alert.alert('Sign In', 'Email or Password incorrect');
         } else if (res.data.error === 401) {
           Alert.alert('Sign In', 'Email or Password incorrect');
         } else if (res.status === 200) {
-          AsyncStorage.setItem('token', res.data.token);
+          const {token, userId} = res.data;
+          AsyncStorage.setItem('token', token);
           Alert.alert('Success', 'Log in successful'); //alert if user is registered and getting the first name
-          if (fullName) {
+
+          if (res.data.token) {
             navigation.replace('Home', {fullName}); //routing the logged in user to the Event page
           }
         }
       })
       .catch(err => err);
   };
+
   return (
     <View style={container}>
       <View style={wrapper}>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, TextInput, Button, Alert} from 'react-native';
+import {Text, View, TextInput, Alert} from 'react-native';
 import {styles} from '../Styles.components/signup_styles';
 import axios from 'axios';
 import {TouchableHighlight} from 'react-native-gesture-handler';
@@ -16,6 +16,7 @@ const Signup = ({navigation}) => {
     touchableHighlight,
     wrapper,
   } = styles;
+
   const postEvents = async () => {
     if (fullName === '') {
       Alert.alert('input', 'Name is required');
@@ -30,7 +31,7 @@ const Signup = ({navigation}) => {
       Alert.alert('input', 'Password is required');
       return;
     } else if (password.length < 8) {
-      Alert.alert('Password', 'Password is required');
+      Alert.alert('Password', 'Password must be upto 8 character or above');
       return;
     } else if (gender === '') {
       Alert.alert('input', 'Gender is required');
@@ -46,8 +47,13 @@ const Signup = ({navigation}) => {
       .post('http://192.168.43.22:5000/scheduler/users', userObject)
       .then(res => {
         if (res.status === 200) {
+          // console.log('res.data', res.data);
           Alert.alert('Success', 'Tnanks for signing with us');
           navigation.replace('signin');
+        } else if (res.status === 301) {
+          console.log('res.data', res.data);
+        } else if (res.status === 401) {
+          console.log('res.data', res.data);
         }
       })
       .catch(err => err);
@@ -98,5 +104,3 @@ const Signup = ({navigation}) => {
 };
 
 export default Signup;
-
-// const styles = StyleSheet.create({});

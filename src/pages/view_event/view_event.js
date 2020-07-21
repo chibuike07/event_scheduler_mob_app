@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, TouchableHighlight} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import EventList from './event_list';
 import axios from 'axios';
 import {styles} from './view_event_screen';
 import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const view_event = ({route, navigation}) => {
   const [viewEvent, handleSetViewEvent] = useState([]);
   const {container, eventWrapper, text} = styles;
+
   useEffect(() => {
     const fetchEvent = async () => {
       await axios
-        .get('http://192.168.43.22:5000/scheduler/user_list')
+        .get(`http://192.168.43.22:5000/scheduler/user_list`)
         .then(res => {
           res.data.map(event => {
             if (event.fullName === route.params.fullName) {
@@ -21,7 +23,7 @@ const view_event = ({route, navigation}) => {
         });
     };
     fetchEvent();
-  }, [route]);
+  }, []);
   return (
     <LinearGradient
       colors={['#008080', '#004c4c', '#66b2b2']}

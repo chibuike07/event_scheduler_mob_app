@@ -1,9 +1,10 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import {Text, View, TextInput, Alert, TouchableHighlight} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import axios from 'axios';
 import {styles} from './add_event_styles';
 import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const add_event = ({route, navigation}) => {
   const [title, handleTitle] = useState('');
@@ -20,6 +21,7 @@ const add_event = ({route, navigation}) => {
     textinput,
     textinputmask,
   } = styles;
+
   const handleSubmit = async () => {
     let validDate = isValidDate.isValid();
     let validTime = isValidTime.isValid();
@@ -43,7 +45,7 @@ const add_event = ({route, navigation}) => {
       Alert.alert('Description', 'Description field is required');
       return;
     }
-    console.log('evntDetail', evntDetail);
+
     let eventDetail = {
       title,
       reminderDate,

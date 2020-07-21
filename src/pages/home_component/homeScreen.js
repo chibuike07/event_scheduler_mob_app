@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import HomePage from './home';
 import CreatEvent from '../create_event/add_event';
@@ -28,6 +28,7 @@ const homeScreen = ({route, navigation}) => {
       <Stack.Screen name="Modify" component={Modify} />
     </Stack.Navigator>
   );
+
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" children={HomeScreens} />

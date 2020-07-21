@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableHighlight, Alert} from 'react-native';
 import axios from 'axios';
-
+import AsyncStorage from '@react-native-community/async-storage';
 const event_list = ({
   title,
   desc,
@@ -49,7 +49,7 @@ const event_list = ({
       });
       value.event = notRemoved;
       axios.put(
-        'http://192.168.43.22:5000/scheduler/user_list/' + value._id,
+        `http://192.168.43.22:5000/scheduler/user_list/${value._id}`,
         value,
       );
       navigation.replace('view event');
@@ -67,7 +67,7 @@ const event_list = ({
   return (
     <View>
       <TouchableHighlight style={eventWrapper} onPress={() => clickOptions()}>
-        <View style={eventWrapper}>
+        <View style={{width: 200, backgroundColor: 'inherit'}}>
           <Text style={text}>
             {dateString} {time}
           </Text>

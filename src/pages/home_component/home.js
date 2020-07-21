@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import {Text, TouchableHighlight} from 'react-native';
 import {styles} from '../create_event/add_event_styles';
 import LinearGradient from 'react-native-linear-gradient';
 
-const home = ({route, navigation}) => {
+const home = ({navigation}) => {
   const {container, touchableHighlight, text} = styles;
   return (
     <LinearGradient

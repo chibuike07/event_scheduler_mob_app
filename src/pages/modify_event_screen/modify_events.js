@@ -4,6 +4,7 @@ import {TextInputMask} from 'react-native-masked-text';
 import {styles} from '../create_event/add_event_styles';
 import axios from 'axios';
 import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const modify_events = ({route, navigation}) => {
   const [title, handleTitle] = useState('');
@@ -16,7 +17,7 @@ const modify_events = ({route, navigation}) => {
   const [isValidTime, setIsValidTime] = useState();
   const {textinput, textinputmask, container, text} = styles;
 
-  const handleModify = () => {
+  const handleModify = async () => {
     let validDate = isValidDate.isValid();
     let validTime = isValidTime.isValid();
     if (title === '') {
@@ -49,16 +50,17 @@ const modify_events = ({route, navigation}) => {
       data.filter(value => {
         return route.params.fullName === value.fullName;
       });
-    res.map(value => {
-      let updatedEventIndex = value.event.findIndex((values, index) => {
+    res.map(async value => {
+      let updatedEventIndex = value.event.findIndex(values => {
         return values._id === id;
       });
       value.event.splice(updatedEventIndex, 1, eventDetail);
-      axios.put(
+      await axios.put(
         `http://192.168.43.22:5000/scheduler/user_list/${value._id}`,
         value,
       );
     });
+
     Alert.alert('Event Update', 'Event updated successfully');
     navigation.replace('Activity');
   };
@@ -72,7 +74,7 @@ const modify_events = ({route, navigation}) => {
     handleId(id);
     const fetchData = async () => {
       await axios
-        .get(`http://192.168.43.22:5000/scheduler/user_list`)
+        .get(`http://192.168.43.22:5000/scheduler/user_list`, {})
         .then(res => setData(res.data));
     };
     fetchData();
