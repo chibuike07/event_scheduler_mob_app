@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableHighlight, Alert} from 'react-native';
+import {View, Text, TouchableHighlight, Alert, Image} from 'react-native';
 import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
 require('dotenv').config();
+import AsyncStorage from '@react-native-community/async-storage';
 const event_list = ({
   title,
   desc,
   id,
   date,
   time,
+  image,
   eventWrapper,
   text,
   navigation,
@@ -17,8 +18,8 @@ const event_list = ({
   const [data, setData] = useState([]);
 
   let dateString = new Date(date).toDateString();
+  console.log('dateString', dateString);
   const {fullName} = route.params;
-
   const clickOptions = () => [
     Alert.alert('Event List', 'Reschedule Event', [
       {text: 'Delete Event', onPress: () => deleteEvent()},
@@ -26,41 +27,37 @@ const event_list = ({
       {
         text: 'Yes',
         onPress: () =>
-          navigation.navigate('Modify', {
+          navigation.navigate('event_detail', {
             title,
             date,
             desc,
             time,
             id,
-            fullName,
+            image,
           }),
       },
     ]),
   ];
 
-  const deleteEvent = () => {
-    let res =
-      data &&
-      data.filter(value => {
-        return route.params.fullName === value.fullName;
+  const deleteEvent = async () => {
+    data &&
+      data.filter(async value => {
+        if (value._id === id) {
+          setId(value._id);
+          await axios.delete(
+            `http://${process.env.HOST}/admin_post/event_update/${value._id}`,
+            value,
+          );
+          // return value;
+        }
       });
-    res.map(value => {
-      let notRemoved = value.event.filter(({_id}) => {
-        return _id !== id;
-      });
-      value.event = notRemoved;
-      axios.put(
-        `http://${process.env.HOST}/scheduler/user_list/${value._id}`,
-        value,
-      );
-      navigation.replace('view event');
-    });
+    navigation.replace('view event');
   };
 
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get(`http://${process.env.HOST}/scheduler/user_list/`)
+        .get(`http://${process.env.HOST}/admin_post/event_update/`)
         .then(res => setData(res.data));
     };
     fetchData();
@@ -69,11 +66,21 @@ const event_list = ({
     <View>
       <TouchableHighlight style={eventWrapper} onPress={() => clickOptions()}>
         <View style={{width: 200, backgroundColor: 'inherit'}}>
+          <View>
+            <Image
+              source={{uri: image}}
+              style={{
+                width: 200,
+                height: 150,
+                borderRadius: 50,
+                backgroundColor: '#66b2b2',
+              }}
+            />
+          </View>
+          <Text>{title}</Text>
           <Text style={text}>
             {dateString} {time}
           </Text>
-          <Text>{title}</Text>
-          <Text numberOfLines={5}>{desc}</Text>
         </View>
       </TouchableHighlight>
     </View>

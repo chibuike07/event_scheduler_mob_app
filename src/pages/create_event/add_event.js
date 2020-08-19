@@ -4,6 +4,7 @@ import {TextInputMask} from 'react-native-masked-text';
 import axios from 'axios';
 import {styles} from './add_event_styles';
 import LinearGradient from 'react-native-linear-gradient';
+require('dotenv').config();
 import AsyncStorage from '@react-native-community/async-storage';
 
 const add_event = ({route, navigation}) => {
@@ -55,7 +56,7 @@ const add_event = ({route, navigation}) => {
     };
 
     await axios
-      .post('http://192.168.43.22:5000/scheduler/events', eventDetail)
+      .post(`http://${process.env.HOST}/scheduler/events`, eventDetail)
       .then(res => {
         if (res.data === 'ok') {
           Alert.alert('Create', 'Event added successfully');

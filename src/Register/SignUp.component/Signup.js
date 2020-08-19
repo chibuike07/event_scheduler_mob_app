@@ -3,7 +3,7 @@ import {Text, View, TextInput, Alert} from 'react-native';
 import {styles} from '../Styles.components/signup_styles';
 import axios from 'axios';
 import {TouchableHighlight} from 'react-native-gesture-handler';
-
+require('dotenv').config();
 const Signup = ({navigation}) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -44,7 +44,7 @@ const Signup = ({navigation}) => {
     };
 
     axios
-      .post('http://192.168.43.22:5000/scheduler/users', userObject)
+      .post(`http://${process.env.HOST}/scheduler/users`, userObject)
       .then(res => {
         if (res.status === 200) {
           // console.log('res.data', res.data);

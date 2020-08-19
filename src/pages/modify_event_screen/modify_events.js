@@ -74,7 +74,7 @@ const modify_events = ({route, navigation}) => {
     handleId(id);
     const fetchData = async () => {
       await axios
-        .get(`http://192.168.43.22:5000/scheduler/user_list`, {})
+        .get(`http://192.168.43.22:5000/scheduler/user_list`)
         .then(res => setData(res.data));
     };
     fetchData();

@@ -21,6 +21,11 @@ const home = ({navigation}) => {
         onPress={() => navigation.navigate('view event')}>
         <Text style={text}>View Event</Text>
       </TouchableHighlight>
+      <TouchableHighlight
+        style={touchableHighlight}
+        onPress={() => navigation.navigate('course')}>
+        <Text style={text}>Courses</Text>
+      </TouchableHighlight>
     </LinearGradient>
   );
 };

@@ -7,21 +7,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-community/async-storage';
 require('dotenv').config();
 
-const view_event = ({route, navigation}) => {
+const Courses = ({route, navigation}) => {
   const [viewEvent, handleSetViewEvent] = useState([]);
   const {container, eventWrapper, text} = styles;
 
   useEffect(() => {
     const fetchEvent = async () => {
       await axios
-        .get(`http://${process.env.HOST}/scheduler/user_list`)
-        .then(res => {
-          res.data.map(event => {
-            if (event.fullName === route.params.fullName) {
-              return handleSetViewEvent(event.event);
-            }
-          });
-        });
+        .get(`http://${process.env.HOST}/admin_post/event_update/`)
+        .then(res => handleSetViewEvent(res.data));
     };
     fetchEvent();
   }, []);
@@ -49,8 +43,9 @@ const view_event = ({route, navigation}) => {
             <EventList
               title={item.title}
               desc={item.description}
-              date={item.reminderDate}
-              time={item.reminderTime}
+              date={item.date}
+              time={item.time}
+              image={item.image}
               id={item._id}
               eventWrapper={eventWrapper}
               text={text}
@@ -65,4 +60,4 @@ const view_event = ({route, navigation}) => {
   );
 };
 
-export default view_event;
+export default Courses;

@@ -3,6 +3,7 @@ import {Text, View, TextInput, Alert, TouchableHighlight} from 'react-native';
 import axios from 'axios';
 import {styles} from '../Styles.components/SignIn_styles';
 import AsyncStorage from '@react-native-community/async-storage';
+require('dotenv').config();
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
@@ -35,7 +36,7 @@ const SignIn = ({navigation}) => {
     };
 
     await axios
-      .post('http://192.168.43.22:5000/signincheck', userEvent)
+      .post(`http://${process.env.HOST}/signincheck`, userEvent)
       .then(res => {
         // comparing the user input values user authentication
         let {fullName} = res.data;
