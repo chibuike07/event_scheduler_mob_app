@@ -50,7 +50,9 @@ const event_list = ({
       });
       value.event = notRemoved;
       axios.put(
-        `http://${process.env.HOST}/scheduler/user_list/${value._id}`,
+        `https://schedule-mop-app.herokuapp.com/scheduler/user_list/${
+          value._id
+        }`,
         value,
       );
       navigation.replace('view event');
@@ -60,7 +62,7 @@ const event_list = ({
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get(`http://${process.env.HOST}/scheduler/user_list/`)
+        .get(`https://schedule-mop-app.herokuapp.com/scheduler/user_list/`)
         .then(res => setData(res.data));
     };
     fetchData();

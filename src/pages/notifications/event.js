@@ -14,7 +14,7 @@ const Courses = ({route, navigation}) => {
   useEffect(() => {
     const fetchEvent = async () => {
       await axios
-        .get(`http://${process.env.HOST}/admin_post/event_update/`)
+        .get(`https://schedule-mop-app.herokuapp.com/admin_post/event_update/`)
         .then(res => handleSetViewEvent(res.data));
     };
     fetchEvent();

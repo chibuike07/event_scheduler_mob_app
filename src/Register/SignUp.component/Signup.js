@@ -44,7 +44,10 @@ const Signup = ({navigation}) => {
     };
 
     axios
-      .post(`http://${process.env.HOST}/scheduler/users`, userObject)
+      .post(
+        `https://schedule-mop-app.herokuapp.com/scheduler/users`,
+        userObject,
+      )
       .then(res => {
         if (res.status === 200) {
           // console.log('res.data', res.data);

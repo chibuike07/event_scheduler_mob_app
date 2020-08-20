@@ -14,7 +14,7 @@ const view_event = ({route, navigation}) => {
   useEffect(() => {
     const fetchEvent = async () => {
       await axios
-        .get(`http://${process.env.HOST}/scheduler/user_list`)
+        .get(`https://schedule-mop-app.herokuapp.com/scheduler/user_list`)
         .then(res => {
           res.data.map(event => {
             if (event.fullName === route.params.fullName) {

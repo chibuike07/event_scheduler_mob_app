@@ -4,6 +4,7 @@ import {TextInputMask} from 'react-native-masked-text';
 import axios from 'axios';
 import {styles} from './add_event_styles';
 import LinearGradient from 'react-native-linear-gradient';
+// import {HOST} from 'react-native-dotenv';
 // require('dotenv').config();
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -56,7 +57,10 @@ const add_event = ({route, navigation}) => {
     };
 
     await axios
-      .post(`http://${process.env.HOST}/scheduler/events`, eventDetail)
+      .post(
+        `https://schedule-mop-app.herokuapp.com/scheduler/events`,
+        eventDetail,
+      )
       .then(res => {
         if (res.data === 'ok') {
           Alert.alert('Create', 'Event added successfully');

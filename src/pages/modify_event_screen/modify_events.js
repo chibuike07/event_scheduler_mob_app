@@ -4,7 +4,7 @@ import {TextInputMask} from 'react-native-masked-text';
 import {styles} from '../create_event/add_event_styles';
 import axios from 'axios';
 import LinearGradient from 'react-native-linear-gradient';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
 
 const modify_events = ({route, navigation}) => {
   const [title, handleTitle] = useState('');
@@ -56,7 +56,9 @@ const modify_events = ({route, navigation}) => {
       });
       value.event.splice(updatedEventIndex, 1, eventDetail);
       await axios.put(
-        `http://192.168.43.22:5000/scheduler/user_list/${value._id}`,
+        `https://schedule-mop-app.herokuapp.com/scheduler/user_list/${
+          value._id
+        }`,
         value,
       );
     });
@@ -74,7 +76,7 @@ const modify_events = ({route, navigation}) => {
     handleId(id);
     const fetchData = async () => {
       await axios
-        .get(`http://192.168.43.22:5000/scheduler/user_list`)
+        .get(`https://schedule-mop-app.herokuapp.com/scheduler/user_list`)
         .then(res => setData(res.data));
     };
     fetchData();

@@ -36,7 +36,7 @@ const SignIn = ({navigation}) => {
     };
 
     await axios
-      .post(`http://${process.env.HOST}/signincheck`, userEvent)
+      .post(`https://schedule-mop-app.herokuapp.com/signincheck`, userEvent)
       .then(res => {
         // comparing the user input values user authentication
         let {fullName} = res.data;

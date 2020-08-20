@@ -45,7 +45,9 @@ const event_list = ({
         if (value._id === id) {
           setId(value._id);
           await axios.delete(
-            `http://${process.env.HOST}/admin_post/event_update/${value._id}`,
+            `https://schedule-mop-app.herokuapp.com/admin_post/event_update/${
+              value._id
+            }`,
             value,
           );
           // return value;
@@ -57,7 +59,7 @@ const event_list = ({
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get(`http://${process.env.HOST}/admin_post/event_update/`)
+        .get(`https://schedule-mop-app.herokuapp.com/admin_post/event_update/`)
         .then(res => setData(res.data));
     };
     fetchData();
