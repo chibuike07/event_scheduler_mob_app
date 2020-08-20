@@ -1,7 +1,7 @@
 package com.learn_react_native;
 
 import com.facebook.react.ReactActivity;
-
+import com.rnfs.RNFSPackage; 
 public class MainActivity extends ReactActivity {
 
   /**
@@ -12,4 +12,11 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "schedule app";
   }
+
+   @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+        new MainReactPackage(), // <---- add comma
+        new RNFSPackage() // <---------- add package
+      );
 }

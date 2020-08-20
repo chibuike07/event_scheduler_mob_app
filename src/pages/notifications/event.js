@@ -5,7 +5,7 @@ import axios from 'axios';
 import {styles} from './view_event_screen';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-community/async-storage';
-require('dotenv').config();
+// require('dotenv').config();
 
 const Courses = ({route, navigation}) => {
   const [viewEvent, handleSetViewEvent] = useState([]);

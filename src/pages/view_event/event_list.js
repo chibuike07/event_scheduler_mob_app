@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableHighlight, Alert} from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-require('dotenv').config();
+// require('dotenv').config();
 const event_list = ({
   title,
   desc,

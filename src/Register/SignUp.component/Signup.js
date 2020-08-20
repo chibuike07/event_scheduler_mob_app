@@ -3,7 +3,7 @@ import {Text, View, TextInput, Alert} from 'react-native';
 import {styles} from '../Styles.components/signup_styles';
 import axios from 'axios';
 import {TouchableHighlight} from 'react-native-gesture-handler';
-require('dotenv').config();
+// require('dotenv').config();
 const Signup = ({navigation}) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');

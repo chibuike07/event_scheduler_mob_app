@@ -4,7 +4,7 @@ import {TextInputMask} from 'react-native-masked-text';
 import axios from 'axios';
 import {styles} from './add_event_styles';
 import LinearGradient from 'react-native-linear-gradient';
-require('dotenv').config();
+// require('dotenv').config();
 import AsyncStorage from '@react-native-community/async-storage';
 
 const add_event = ({route, navigation}) => {

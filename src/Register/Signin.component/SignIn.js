@@ -3,7 +3,7 @@ import {Text, View, TextInput, Alert, TouchableHighlight} from 'react-native';
 import axios from 'axios';
 import {styles} from '../Styles.components/SignIn_styles';
 import AsyncStorage from '@react-native-community/async-storage';
-require('dotenv').config();
+// require('dotenv').config();
 const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
